@@ -28,8 +28,8 @@
             // title : "spacelimit",
             canvas : document.createElement("canvas"),
             start : function(){
-                var w = window.innerWidth-2; // -2 accounts for the border
-                var h = window.innerHeight-2;
+               var w = window.innerWidth-2; // -2 accounts for the border
+               var h = window.innerHeight-2;
                this.canvas.width = w;
                this.canvas.height = h;
                this.context = this.canvas.getContext("2d");
