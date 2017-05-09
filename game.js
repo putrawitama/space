@@ -214,7 +214,7 @@
         function showGameOver()
         {
             ctx.font = "bold 60px Arial";
-            ctx.fillStyle = "red";
+            ctx.fillStyle = "white";
             ctx.fillText("Game Over", (gameArea.canvas.width/2)-175, (gameArea.canvas.height/2)-30);
 
         }
