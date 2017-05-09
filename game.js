@@ -190,6 +190,13 @@
             };
         }
 
+        function showScore()
+        {
+            ctx.font = "bold 20px Arial";
+            ctx.fillText("Score : "+manager.score, (gameArea.canvas.width/2)-40, 30);
+
+        }
+
         function consumableComponent(width, height, color, x, y){
             this.name = name;
             this.width = width;
@@ -252,4 +259,5 @@
             lbV.update();
             consumable.update();
             manager.update();
+            showScore();
         }
