@@ -40,7 +40,7 @@
                    lbH.move();
                    lbV.move();
                    updateGameArea();
-               }, 5);
+               }, 20);
 
                window.addEventListener('keydown', function (e) {
                     gameArea.keys = (gameArea.keys || []);
@@ -72,11 +72,12 @@
 */
         function startGame(){
             gameArea.start();
+            manager = new gameManager();
             player = new playerComponent(20, 20, "yellow", 10, 120);
             lbH = new laserbeamComponent(gameArea.canvas.width, 5, "red", 0, 10, "horizontal");
             lbV = new laserbeamComponent(5, gameArea.canvas.height, "red", 70, 0, "vertical");
             consumable = new consumableComponent(10, 10, "blue", 100, 120);
-            manager = new gameManager();
+            
 
         }
 
@@ -85,6 +86,7 @@
             // this.levelElement = document.getElementById("level");
             this.score = 0;
             this.level = 1;
+            this.levelSpeed = 0;
             this.leveling = "not yet";
             this.update = function(){
                 // this.scoreElement.innerHTML = "Score: "+this.score;
@@ -96,6 +98,10 @@
             }
             this.levelUp = function(){
                 this.level += 1;
+                this.levelSpeed += 1;
+                lbH.speedY += this.levelSpeed;
+                lbV.speedX += this.levelSpeed;
+                console.log("Level Up!!");
             };
         }
 
@@ -126,10 +132,10 @@
             this.controlCheck = function(){
                 this.speedX = 0;
                 this.speedY = 0;
-                if (gameArea.keys && gameArea.keys[37]) {this.speedX = -2; }
-                if (gameArea.keys && gameArea.keys[39]) {this.speedX = 2; }
-                if (gameArea.keys && gameArea.keys[38]) {this.speedY = -2; }
-                if (gameArea.keys && gameArea.keys[40]) {this.speedY = 2; }
+                if (gameArea.keys && gameArea.keys[37]) {this.speedX = -(5 + manager.levelSpeed); }
+                if (gameArea.keys && gameArea.keys[39]) {this.speedX = 5  + manager.levelSpeed; }
+                if (gameArea.keys && gameArea.keys[38]) {this.speedY = -(5 + manager.levelSpeed); }
+                if (gameArea.keys && gameArea.keys[40]) {this.speedY = 5 + manager.levelSpeed; }
                 this.newPos();
                 edgeCheck(this);
             };
@@ -146,8 +152,8 @@
             this.name = name;
             this.width = width;
             this.height = height;
-            this.speedX = 1;
-            this.speedY = 1;
+            this.speedX = 2;
+            this.speedY = 2;
             this.x = x;
             this.y = y;
             this.left = this.x;
@@ -163,7 +169,13 @@
                 ctx.fillRect(this.x, this.y, this.width, this.height);
             };
             this.move = function(){
-                if(this.name === "horizontal"){this.y += this.speedY;}else{this.x += this.speedX;}
+                if(this.name === "horizontal"){
+                    //this.speedY += manager.levelSpeed; 
+                    this.y += this.speedY;
+                }else{
+                    //this.speedX += manager.levelSpeed; 
+                    this.x += this.speedX;
+                }
                 this.left = this.x;
                 this.right = this.x + this.width;
                 this.top = this.y;
@@ -240,7 +252,7 @@
                     ((this.left <= player.right) && (this.left >= player.left) &&
                     (this.top <= player.bottom) && (this.top >= player.top) &&
                     (this.bottom <= player.bottom) && (this.bottom >= player.top))){
-                        console.log("Kena makan!");
+                        //console.log("Kena makan!");
                         this.collisionHandler();
                     }
             };
