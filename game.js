@@ -72,20 +72,20 @@
             player = new playerComponent(20, 20, "yellow", 10, 120);
             lbH = new laserbeamComponent(gameArea.canvas.width, 5, "red", 0, 10, "horizontal");
             lbV = new laserbeamComponent(5, gameArea.canvas.height, "red", 70, 0, "vertical");
-            consumable = new consumableComponent(5, 5, "blue", 100, 120);
+            consumable = new consumableComponent(10, 10, "blue", 100, 120);
             manager = new gameManager();
 
         }
 
         function gameManager(){
-            this.scoreElement = document.getElementById("scoreboard");
-            this.levelElement = document.getElementById("level");
+            // this.scoreElement = document.getElementById("scoreboard");
+            // this.levelElement = document.getElementById("level");
             this.score = 0;
             this.level = 1;
             this.leveling = "not yet";
             this.update = function(){
-                this.scoreElement.innerHTML = "Score: "+this.score;
-                this.levelElement.innerHTML = "Level: "+this.level;
+                // this.scoreElement.innerHTML = "Score: "+this.score;
+                // this.levelElement.innerHTML = "Level: "+this.level;
                 if(this.score > 0 && this.score%5 == 0 && this.leveling == "not yet"){
                     this.levelUp();
                     this.leveling = "done";
@@ -197,6 +197,13 @@
 
         }
 
+        function showLevel()
+        {
+            ctx.font = "bold 20px Arial";
+            ctx.fillText("Level : "+manager.level, 40, 30);
+
+        }
+
         function consumableComponent(width, height, color, x, y){
             this.name = name;
             this.width = width;
@@ -260,4 +267,5 @@
             consumable.update();
             manager.update();
             showScore();
+            showLevel();
         }
