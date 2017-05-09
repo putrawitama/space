@@ -193,6 +193,7 @@
         function showScore()
         {
             ctx.font = "bold 20px Arial";
+            ctx.fillStyle = "green";
             ctx.fillText("Score : "+manager.score, (gameArea.canvas.width/2)-40, 30);
 
         }
@@ -200,6 +201,7 @@
         function showLevel()
         {
             ctx.font = "bold 20px Arial";
+            ctx.fillStyle = "green";
             ctx.fillText("Level : "+manager.level, 40, 30);
 
         }
