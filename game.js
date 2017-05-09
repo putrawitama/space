@@ -86,7 +86,8 @@
             // this.levelElement = document.getElementById("level");
             this.score = 0;
             this.level = 1;
-            this.levelSpeed = 0;
+            this.levelSpeed = 1;
+            this.charLevelSpeed = 0;
             this.leveling = "not yet";
             this.update = function(){
                 // this.scoreElement.innerHTML = "Score: "+this.score;
@@ -98,7 +99,7 @@
             }
             this.levelUp = function(){
                 this.level += 1;
-                this.levelSpeed += 1;
+                this.charLevelSpeed += 1;
                 if (lbH.speedY < 0) {
                     lbH.speedY *= -1;
                     lbH.speedY += this.levelSpeed;
@@ -115,7 +116,7 @@
                 }
                 // 
                 // 
-                console.log("horz spd = "+lbH.speedY+", vert spd = "+lbV.speedX);
+                console.log("charspeed = "+player.speedX+", "+player.speedY+". horz spd = "+lbH.speedY+", vert spd = "+lbV.speedX);
             };
         }
 
@@ -146,10 +147,10 @@
             this.controlCheck = function(){
                 this.speedX = 0;
                 this.speedY = 0;
-                if (gameArea.keys && gameArea.keys[37]) {this.speedX = -(5 + manager.levelSpeed); }
-                if (gameArea.keys && gameArea.keys[39]) {this.speedX = 5  + manager.levelSpeed; }
-                if (gameArea.keys && gameArea.keys[38]) {this.speedY = -(5 + manager.levelSpeed); }
-                if (gameArea.keys && gameArea.keys[40]) {this.speedY = 5 + manager.levelSpeed; }
+                if (gameArea.keys && gameArea.keys[37]) {this.speedX = -(5 + manager.charLevelSpeed); }
+                if (gameArea.keys && gameArea.keys[39]) {this.speedX = 5  + manager.charLevelSpeed; }
+                if (gameArea.keys && gameArea.keys[38]) {this.speedY = -(5 + manager.charLevelSpeed); }
+                if (gameArea.keys && gameArea.keys[40]) {this.speedY = 5 + manager.charLevelSpeed; }
                 this.newPos();
                 edgeCheck(this);
             };
