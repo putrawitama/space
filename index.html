@@ -42,11 +42,25 @@
           width: 165px;
           text-align: center;
         }
+        .ui{
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, 0);
+          width: 250px;
+          height: 100px;
+          text-align: center;
+          vertical-align: middle;
+          display: none;
+        }
 
     </style>
     <script src="game.js"></script>
 </head>
 <body>
+  <div id="ui" class="ui">
+    <button onclick="startGame()" id="retry" class="button">Play Again</button>
+  </div>
   <div class="cover">
     <h1 class="title">Space Limit</h1>
     <button class="button" onclick="startGame()">Play</button>

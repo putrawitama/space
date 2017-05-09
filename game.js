@@ -32,8 +32,10 @@
                var h = window.innerHeight-2;
                this.canvas.width = w;
                this.canvas.height = h;
+               this.ui = document.getElementById("ui");
+               this.ui.style.display = "none";
                this.context = this.canvas.getContext("2d");
-              //  document.body.insertBefore(this.title, document.body.childNodes[0]);
+               document.body.insertBefore(this.ui, document.body.childNodes[0]);
                document.body.insertBefore(this.canvas, document.body.childNodes[1]);
 
                this.interval = setInterval(function(){
@@ -211,6 +213,7 @@
                         (this.bottom > player.top) && (this.bottom < player.bottom)){
                         gameArea.stop();
                         showGameOver();
+
                     }
                 }else if(this.name === "vertical"){
                     if((this.left < player.right) && (this.left > player.left) ||
@@ -240,9 +243,10 @@
 
         function showGameOver()
         {
+            gameArea.ui.style.display = "block";
             ctx.font = "bold 60px Arial";
             ctx.fillStyle = "white";
-            ctx.fillText("Game Over", (gameArea.canvas.width/2)-175, (gameArea.canvas.height/2)-30);
+            ctx.fillText("Game Over", (gameArea.canvas.width/2)-160, (gameArea.canvas.height/2)-30);
 
         }
 
