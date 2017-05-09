@@ -52,6 +52,9 @@
             },
             clear : function(){
                 this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            },
+            stop : function() {
+                clearInterval(this.interval);
             }
         };
 
@@ -179,12 +182,12 @@
                 if(this.name === "horizontal"){
                     if((this.top < player.bottom) && (this.top > player.top) ||
                         (this.bottom > player.top) && (this.bottom < player.bottom)){
-                        console.log("Kena Horizontal!");
+                        gameArea.stop();
                     }
                 }else if(this.name === "vertical"){
                     if((this.left < player.right) && (this.left > player.left) ||
                         (this.right > player.left) && (this.right < player.right)){
-                        console.log("Kena Vertical!");
+                        gameArea.stop();
                     }
                 }
             };
@@ -223,14 +226,22 @@
                 ctx.fillRect(this.x, this.y, this.width, this.height);
             };
             this.playerCollision = function(){
-                if((this.top < player.bottom) &&
-                    (this.top > player.top) &&
-                    (this.bottom > player.top) &&
-                    (this.bottom < player.bottom) &&
-                    (this.left < player.right) &&
-                    (this.left > player.left) &&
-                    (this.right > player.left) &&
-                    (this.right < player.right)){
+                if(((this.top <= player.bottom) && (this.top >= player.top) &&
+                    (this.bottom >= player.top) && (this.bottom <= player.bottom) &&
+                    (this.left <= player.right) && (this.left >= player.left) &&
+                    (this.right >= player.left) && (this.right <= player.right)) ||
+                    ((this.top <= player.bottom) && (this.top >= player.top) &&
+                    (this.left >= player.left) && (this.left <= player.right) &&
+                    (this.right <= player.right) && (this.right >= player.left)) ||
+                    ((this.right >= player.left) && (this.right <= player.right) &&
+                    (this.top >= player.top) && (this.top <= player.bottom) &&
+                    (this.bottom >= player.top) && (this.bottom <= player.bottom)) ||
+                    ((this.bottom >= player.top) && (this.bottom <= player.bottom) &&
+                    (this.right <= player.right) && (this.right >= player.left) &&
+                    (this.left <= player.right) && (this.left >= player.left)) ||
+                    ((this.left <= player.right) && (this.left >= player.left) &&
+                    (this.top <= player.bottom) && (this.top >= player.top) &&
+                    (this.bottom <= player.bottom) && (this.bottom >= player.top))){
                         console.log("Kena makan!");
                         this.collisionHandler();
                     }
