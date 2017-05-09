@@ -99,9 +99,23 @@
             this.levelUp = function(){
                 this.level += 1;
                 this.levelSpeed += 1;
-                lbH.speedY += this.levelSpeed;
-                lbV.speedX += this.levelSpeed;
-                console.log("Level Up!!");
+                if (lbH.speedY < 0) {
+                    lbH.speedY *= -1;
+                    lbH.speedY += this.levelSpeed;
+                    lbH.speedY *= -1;
+                }else{
+                    lbH.speedY += this.levelSpeed;
+                }
+                if (lbV.speedX < 0) {
+                    lbV.speedX *= -1;
+                    lbV.speedX += this.levelSpeed;
+                    lbV.speedX *= -1;
+                }else{
+                    lbV.speedX += this.levelSpeed;
+                }
+                // 
+                // 
+                console.log("horz spd = "+lbH.speedY+", vert spd = "+lbV.speedX);
             };
         }
 
