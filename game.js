@@ -195,11 +195,13 @@
                     if((this.top < player.bottom) && (this.top > player.top) ||
                         (this.bottom > player.top) && (this.bottom < player.bottom)){
                         gameArea.stop();
+                        showGameOver();
                     }
                 }else if(this.name === "vertical"){
                     if((this.left < player.right) && (this.left > player.left) ||
                         (this.right > player.left) && (this.right < player.right)){
                         gameArea.stop();
+                        showGameOver();
                     }
                 }
             };
@@ -208,6 +210,7 @@
         function showScore()
         {
             ctx.font = "bold 20px Arial";
+            ctx.fillStyle = "green";
             ctx.fillText("Score : "+manager.score, (gameArea.canvas.width/2)-40, 30);
 
         }
@@ -215,7 +218,16 @@
         function showLevel()
         {
             ctx.font = "bold 20px Arial";
+            ctx.fillStyle = "green";
             ctx.fillText("Level : "+manager.level, 40, 30);
+
+        }
+
+        function showGameOver()
+        {
+            ctx.font = "bold 60px Arial";
+            ctx.fillStyle = "white";
+            ctx.fillText("Game Over", (gameArea.canvas.width/2)-175, (gameArea.canvas.height/2)-30);
 
         }
 
