@@ -25,7 +25,7 @@ self.addEventListener('install', e => {
   e.waitUntil(
     caches.open('space').then(cache => {
       return cache.addAll([
-        '/',
+        '/space/',
         '/space/index.html?timestamp=${timeStamp}',
         '/space/style/game.css?timestamp=${timeStamp}',
         '/space/scripts/game.js?timestamp=${timeStamp}',
