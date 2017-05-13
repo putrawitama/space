@@ -285,6 +285,7 @@
             ctx.fillStyle = "white";
             ctx.fillText("Game Over", (gameArea.canvas.width/2)-160, (gameArea.canvas.height/2)-30);
             audio.stop();
+            audio = null;
 
         }
 
