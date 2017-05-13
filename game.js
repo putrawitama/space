@@ -24,6 +24,7 @@
         var lbV;
         var consumable;
         var manager;
+        var joystick;
         var gameArea = {
             // title : "spacelimit",
             canvas : document.createElement("canvas"),
@@ -34,6 +35,8 @@
                this.canvas.height = h;
                this.ui = document.getElementById("ui");
                this.ui.style.display = "none";
+               this.cover = document.getElementById("cover");
+               this.cover.style.display = "none";
                this.context = this.canvas.getContext("2d");
                document.body.insertBefore(this.ui, document.body.childNodes[0]);
                document.body.insertBefore(this.canvas, document.body.childNodes[1]);
@@ -74,12 +77,31 @@
 */
         function startGame(){
             gameArea.start();
+            gameArea.cover.style.display = "none";
             manager = new gameManager();
             player = new playerComponent(20, 20, "yellow", 10, 120);
             lbH = new laserbeamComponent(gameArea.canvas.width, 5, "red", 0, 10, "horizontal");
             lbV = new laserbeamComponent(5, gameArea.canvas.height, "red", 70, 0, "vertical");
             consumable = new consumableComponent(10, 10, "blue", 100, 120);
-            
+            if (VirtualJoystick.touchScreenAvailable()) {
+              joystick = new VirtualJoystick({
+                        mouseSupport: true,
+              		      stationaryBase: true,
+                        baseX: gameArea.canvas.width-70,
+                        baseY: gameArea.canvas.height-70,
+              		      limitStickTravel: true,
+              		      stickRadius: 50
+                                 });
+            }
+            // if (gameArea.canvas.requestFullscreen) {
+            //   gameArea.canvas.requestFullscreen();
+            // } else if (gameArea.canvas.msRequestFullscreen) {
+            //   gameArea.canvas.msRequestFullscreen();
+            // } else if (gameArea.canvas.mozRequestFullScreen) {
+            //   gameArea.canvas.mozRequestFullScreen();
+            // } else if (gameArea.canvas.webkitRequestFullscreen) {
+            //   gameArea.canvas.webkitRequestFullscreen();
+            // }
 
         }
 
@@ -116,8 +138,8 @@
                 }else{
                     lbV.speedX += this.levelSpeed;
                 }
-                // 
-                // 
+                //
+                //
                 console.log("charspeed = "+player.speedX+", "+player.speedY+". horz spd = "+lbH.speedY+", vert spd = "+lbV.speedX);
             };
         }
@@ -149,10 +171,17 @@
             this.controlCheck = function(){
                 this.speedX = 0;
                 this.speedY = 0;
-                if (gameArea.keys && gameArea.keys[37]) {this.speedX = -(5 + manager.charLevelSpeed); }
-                if (gameArea.keys && gameArea.keys[39]) {this.speedX = 5  + manager.charLevelSpeed; }
-                if (gameArea.keys && gameArea.keys[38]) {this.speedY = -(5 + manager.charLevelSpeed); }
-                if (gameArea.keys && gameArea.keys[40]) {this.speedY = 5 + manager.charLevelSpeed; }
+                if (VirtualJoystick.touchScreenAvailable()) {
+                  if (joystick.left()) {this.speedX = -(5 + manager.charLevelSpeed); } //left
+                  if (joystick.right()) {this.speedX = 5  + manager.charLevelSpeed; } //right
+                  if (joystick.up()) {this.speedY = -(5 + manager.charLevelSpeed); } //up
+                  if (joystick.down()) {this.speedY = 5 + manager.charLevelSpeed; } //down
+                } else {
+                  if (gameArea.keys && gameArea.keys[37]) {this.speedX = -(5 + manager.charLevelSpeed); } //left
+                  if (gameArea.keys && gameArea.keys[39]) {this.speedX = 5  + manager.charLevelSpeed; } //right
+                  if (gameArea.keys && gameArea.keys[38]) {this.speedY = -(5 + manager.charLevelSpeed); } //up
+                  if (gameArea.keys && gameArea.keys[40]) {this.speedY = 5 + manager.charLevelSpeed; } //down
+                }
                 this.newPos();
                 edgeCheck(this);
             };
@@ -187,10 +216,10 @@
             };
             this.move = function(){
                 if(this.name === "horizontal"){
-                    //this.speedY += manager.levelSpeed; 
+                    //this.speedY += manager.levelSpeed;
                     this.y += this.speedY;
                 }else{
-                    //this.speedX += manager.levelSpeed; 
+                    //this.speedX += manager.levelSpeed;
                     this.x += this.speedX;
                 }
                 this.left = this.x;

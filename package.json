@@ -1,0 +1,27 @@
+{
+  "name": "space",
+  "version": "1.0.0",
+  "description": "game HTML5 avoids the line",
+  "main": "game.js",
+  "dependencies": {
+    "nipplejs": "^0.6.7"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/putrawitama/Space-limit.git"
+  },
+  "keywords": [
+    "game",
+    "html5"
+  ],
+  "author": "putrawitama",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/putrawitama/Space-limit/issues"
+  },
+  "homepage": "https://gitlab.com/putrawitama/Space-limit#README"
+}
