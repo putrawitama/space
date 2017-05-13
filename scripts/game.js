@@ -25,6 +25,7 @@
         var consumable;
         var manager;
         var joystick;
+        var audio;
         var gameArea = {
             // title : "spacelimit",
             canvas : document.createElement("canvas"),
@@ -83,6 +84,12 @@
             lbH = new laserbeamComponent(gameArea.canvas.width, 5, "red", 0, 10, "horizontal");
             lbV = new laserbeamComponent(5, gameArea.canvas.height, "red", 70, 0, "vertical");
             consumable = new consumableComponent(10, 10, "blue", 100, 120);
+            audio = new Audio('sounds/backsound.mp3');
+            audio.addEventListener('ended', function() {
+                this.currentTime = 0;
+                this.play();
+            }, false);
+            audio.play();
             if (VirtualJoystick.touchScreenAvailable()) {
               joystick = new VirtualJoystick({
                         container	: document.getElementById('control'),
@@ -277,6 +284,7 @@
             ctx.font = "bold 60px Arial";
             ctx.fillStyle = "white";
             ctx.fillText("Game Over", (gameArea.canvas.width/2)-160, (gameArea.canvas.height/2)-30);
+            audio.stop();
 
         }
 
