@@ -8,9 +8,9 @@
     <title>Space Limit</title>
     <link rel="manifest" href="manifest.json">
     <link rel="icon" type="image/png" href="image/launcher-icon-0-75x.png" />
-    <link rel="stylesheet" href="game.css">
-    <script type="text/javascript" src="game.js"></script>
-    <script src='virtualjoystick.js'></script>
+    <link rel="stylesheet" href="style/game.css">
+    <script type="text/javascript" src="scripts/game.js"></script>
+    <script src='scripts/virtualjoystick.js'></script>
 </head>
 <body>
   <div class="cover" id="cover">
@@ -21,5 +21,17 @@
   <div id="ui" class="ui">
     <button onclick="startGame()" id="retry" class="button">Play Again</button>
   </div>
+  <script>
+    if('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js', { scope: '/space/' })
+        .then(function(registration) {
+              console.log('Service Worker Registered');
+        });
+
+      navigator.serviceWorker.ready.then(function(registration) {
+         console.log('Service Worker Ready');
+      });
+    }
+  </script>
 </body>
 </html>
