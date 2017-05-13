@@ -1,0 +1,51 @@
+html {
+  height: 100%;
+  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+}
+html, body {
+    padding: 0; margin: 0;
+    overflow:hidden;
+}
+  /*canvas{
+      background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+  }*/
+  .button { /* Green */
+      background: none;
+      border-color: white;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      font-size: 20px;
+      display: inline-block;
+      cursor: pointer;
+      border-radius: 30px;
+  }
+  .button:hover {
+      background-color: white;
+      color: black;
+  }
+  .title {
+    color: white;
+  }
+  .cover {
+    transform: translate(-50%, 0);
+    width: 300px;
+    text-align: center;
+    position: absolute;
+    left: 50%;
+    bottom: 50%;
+    top: 50%;
+    display:block;
+  }
+  .ui{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, 0);
+    width: 250px;
+    height: 100px;
+    text-align: center;
+    vertical-align: middle;
+    display: none;
+  }
