@@ -29,7 +29,8 @@ self.addEventListener('install', e => {
         '/space/index.html?timestamp=${timeStamp}',
         '/space/style/game.css?timestamp=${timeStamp}',
         '/space/scripts/game.js?timestamp=${timeStamp}',
-        '/space/scripts/virtualjoystick.js?timestamp=${timeStamp}'
+        '/space/scripts/virtualjoystick.js?timestamp=${timeStamp}',
+        '/space/sounds/backsound.mp3?timestamp=${timeStamp}',
       ])
       .then(() => self.skipWaiting());
     })
