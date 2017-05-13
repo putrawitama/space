@@ -85,6 +85,7 @@
             consumable = new consumableComponent(10, 10, "blue", 100, 120);
             if (VirtualJoystick.touchScreenAvailable()) {
               joystick = new VirtualJoystick({
+                        container	: document.getElementById('control'),
                         mouseSupport: true,
               		      stationaryBase: true,
                         baseX: gameArea.canvas.width-70,
