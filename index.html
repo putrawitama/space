@@ -32,6 +32,12 @@
          console.log('Service Worker Ready');
       });
     }
+    var audio = new Audio('sounds/backsound.mp3');
+    audio.addEventListener('ended', function() {
+        this.currentTime = 0;
+        this.play();
+    }, false);
+    audio.play();
   </script>
 </body>
 </html>
