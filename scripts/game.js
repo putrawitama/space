@@ -88,7 +88,7 @@
                 this.currentTime = 0;
                 this.play();
             }, false);
-            // audio.play();
+            audio.play();
             if (VirtualJoystick.touchScreenAvailable()) {
               joystick = new VirtualJoystick({
                         container	: document.getElementById('control'),
@@ -279,12 +279,12 @@
 
         function showGameOver()
         {
+            audio.pause();
+            audio.currentTime = 0;
             gameArea.ui.style.display = "block";
             ctx.font = "bold 60px Arial";
             ctx.fillStyle = "white";
             ctx.fillText("Game Over", (gameArea.canvas.width/2)-160, (gameArea.canvas.height/2)-30);
-            audio.stop();
-            audio = null;
 
         }
 
