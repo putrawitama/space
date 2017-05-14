@@ -23,7 +23,7 @@
   </div>
   <script>
     if('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('sw.js', { scope: '/space/' })
+      navigator.serviceWorker.register('service-worker.js', { scope: '/space/' })
         .then(function(registration) {
               console.log('Service Worker Registered');
         });
