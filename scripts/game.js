@@ -25,6 +25,7 @@
         var consumable;
         var manager;
         var joystick;
+        var support;
         var audio = new Audio('sounds/backsound.mp3');
         var gameArea = {
             // title : "spacelimit",
@@ -89,6 +90,13 @@
                 this.play();
             }, false);
             audio.play();
+            if (typeof(Storage) !== "undefined") {
+                support = true;          
+            } else {
+                // Sorry! No Web Storage support..
+                window.alert("Maaf, Browser anda tidak support untuk menyimpan browser, Lanjutkan?");
+                support = false;
+            }
             if (VirtualJoystick.touchScreenAvailable()) {
               joystick = new VirtualJoystick({
                         container	: document.getElementById('control'),
@@ -248,14 +256,14 @@
                     if((this.top < player.bottom) && (this.top > player.top) ||
                         (this.bottom > player.top) && (this.bottom < player.bottom)){
                         gameArea.stop();
-                        showGameOver();
+                        showGameOver(support);
 
                     }
                 }else if(this.name === "vertical"){
                     if((this.left < player.right) && (this.left > player.left) ||
                         (this.right > player.left) && (this.right < player.right)){
                         gameArea.stop();
-                        showGameOver();
+                        showGameOver(support);
                     }
                 }
             };
@@ -277,21 +285,25 @@
 
         }
 
-        function showGameOver()
-        {
+        function showGameOver(support)
+        {   
+            
             audio.pause();
-            var LastScore = localStorage.getItem("Last-Score")
             audio.currentTime = 0;
             gameArea.ui.style.display = "block";
             ctx.font = "bold 40px Arial";
             ctx.fillStyle = "white";
             ctx.fillText("Game Over", (gameArea.canvas.width/2)-110, (gameArea.canvas.height/2)-70);
-            ctx.fillText("Your Score :"+manager.score, (gameArea.canvas.width/2)-125, (gameArea.canvas.height/2)-40);
-            if(LastScore < manager.score){
-                localStorage.setItem("Last-Score",manager.score);
-                ctx.fillText("Your High Score :"+manager.score, (gameArea.canvas.width/2)-170, (gameArea.canvas.height/2)-10);
-            } else {
-                ctx.fillText("Your High Score :"+LastScore, (gameArea.canvas.width/2)-170, (gameArea.canvas.height/2)-10);
+            ctx.fillText("Your Score : "+manager.score, (gameArea.canvas.width/2)-125, (gameArea.canvas.height/2)-40);
+            if (support) {
+                // Code for localStorage/sessionStorage.
+                var LastScore = localStorage.getItem("Last-Score");
+                if(LastScore < manager.score){
+                    localStorage.setItem("Last-Score",manager.score);
+                    ctx.fillText("Your High Score : "+manager.score, (gameArea.canvas.width/2)-170, (gameArea.canvas.height/2)-10);
+                } else {
+                    ctx.fillText("Your High Score : "+LastScore, (gameArea.canvas.width/2)-170, (gameArea.canvas.height/2)-10);
+                }
             }
         }
 
