@@ -37,7 +37,7 @@
 /* eslint-disable indent, no-unused-vars, no-multiple-empty-lines, max-nested-callbacks, space-before-function-paren, quotes, comma-spacing */
 'use strict';
 
-var precacheConfig = [["index.html","6f6e2475bad6778bdfecf83fa21a00e1"],["scripts/game.js","4d1435f31034898e85d60d56227179ee"],["scripts/virtualjoystick.js","86c41de54aaf264ada128bac4db5eccd"],["sounds/backsound.mp3","e4498194d14dad34d6a47b58dd42390d"],["style/game.css","f2802a9385de8cac72ffc2ededfff452"]];
+var precacheConfig = [["image/cover.png","1480d832f73029826bce8e5842a95947"],["index.html","046c14bb00fb0ff6e0b4e28b598fd9bd"],["scripts/game.js","200f5e46e28fc61a82a9278fd7fa99dc"],["scripts/virtualjoystick.js","86c41de54aaf264ada128bac4db5eccd"],["sounds/backsound.mp3","28a546a6f79b783465747e1c11ddb72c"],["style/game.css","bbb59d0c890fb6f87dfd166215be5fd3"]];
 var cacheName = 'sw-precache-v3-sw-precache-' + (self.registration ? self.registration.scope : '');
 
 
