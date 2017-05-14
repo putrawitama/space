@@ -26,6 +26,7 @@
         var manager;
         var joystick;
         var support;
+        var name;
         var audio = new Audio('sounds/backsound.mp3');
         var gameArea = {
             // title : "spacelimit",
@@ -285,9 +286,14 @@
 
         }
 
+        function save() {
+            var val = document.getElementById("playerName").value;
+            localStorage.setItem("name", val);
+            console.log('sukses masukinnya');
+        }
+
         function showGameOver(support)
         {   
-            
             audio.pause();
             audio.currentTime = 0;
             gameArea.ui.style.display = "block";
@@ -297,9 +303,9 @@
             ctx.fillText("Your Score : "+manager.score, (gameArea.canvas.width/2)-125, (gameArea.canvas.height/2)-40);
             if (support) {
                 // Code for localStorage/sessionStorage.
-                var LastScore = localStorage.getItem("Last-Score");
+                var LastScore = localStorage.getItem("highScore");
                 if(LastScore < manager.score){
-                    localStorage.setItem("Last-Score",manager.score);
+                    localStorage.setItem("highScore", manager.score);
                     ctx.fillText("Your High Score : "+manager.score, (gameArea.canvas.width/2)-170, (gameArea.canvas.height/2)-10);
                 } else {
                     ctx.fillText("Your High Score : "+LastScore, (gameArea.canvas.width/2)-170, (gameArea.canvas.height/2)-10);
