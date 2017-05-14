@@ -280,12 +280,19 @@
         function showGameOver()
         {
             audio.pause();
+            var LastScore = localStorage.getItem("Last-Score")
             audio.currentTime = 0;
             gameArea.ui.style.display = "block";
-            ctx.font = "bold 60px Arial";
+            ctx.font = "bold 40px Arial";
             ctx.fillStyle = "white";
-            ctx.fillText("Game Over", (gameArea.canvas.width/2)-160, (gameArea.canvas.height/2)-30);
-
+            ctx.fillText("Game Over", (gameArea.canvas.width/2)-110, (gameArea.canvas.height/2)-70);
+            ctx.fillText("Your Score :"+manager.score, (gameArea.canvas.width/2)-125, (gameArea.canvas.height/2)-40);
+            if(LastScore < manager.score){
+                localStorage.setItem("Last-Score",manager.score);
+                ctx.fillText("Your High Score :"+manager.score, (gameArea.canvas.width/2)-170, (gameArea.canvas.height/2)-10);
+            } else {
+                ctx.fillText("Your High Score :"+LastScore, (gameArea.canvas.width/2)-170, (gameArea.canvas.height/2)-10);
+            }
         }
 
         function consumableComponent(width, height, color, x, y){
