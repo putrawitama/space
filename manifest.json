@@ -35,7 +35,7 @@
   ],
   "theme_color": "#1b2735",
   "background_color": "#1b2735",
-  "start_url": "index.html",
-  "display": "standalone",
-  "orientation": "landscape"
+  "start_url": "/space/",
+  "display": "fullscreen",
+  "orientation": "landscape-primary"
 }
