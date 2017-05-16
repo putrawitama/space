@@ -27,6 +27,7 @@
         var joystick;
         var support;
         var name;
+        var touch1;
         var audio = new Audio('sounds/backsound.mp3');
         var gameArea = {
             // title : "spacelimit",
@@ -36,6 +37,7 @@
                var h = window.innerHeight-2;
                this.canvas.width = w;
                this.canvas.height = h;
+               touch1 = TouchController(this.canvas);
                this.ui = document.getElementById("ui");
                this.ui.style.display = "none";
                this.cover = document.getElementById("cover");
@@ -43,7 +45,6 @@
                this.context = this.canvas.getContext("2d");
                document.body.insertBefore(this.ui, document.body.childNodes[0]);
                document.body.insertBefore(this.canvas, document.body.childNodes[1]);
-
                this.interval = setInterval(function(){
                    lbH.move();
                    lbV.move();
@@ -60,6 +61,7 @@
             },
             clear : function(){
                 this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                touch1.draw(this.context);
             },
             stop : function() {
                 clearInterval(this.interval);
@@ -92,33 +94,12 @@
             }, false);
             audio.play();
             if (typeof(Storage) !== "undefined") {
-                support = true;          
+                support = true;
             } else {
                 // Sorry! No Web Storage support..
-                window.alert("Maaf, Browser anda tidak support untuk menyimpan browser, Lanjutkan?");
+                window.alert("Maaf, Browser anda tidak support untuk menyimpan high score, Lanjutkan?");
                 support = false;
             }
-            if (VirtualJoystick.touchScreenAvailable()) {
-              joystick = new VirtualJoystick({
-                        container	: document.getElementById('control'),
-                        mouseSupport: true,
-              		      stationaryBase: true,
-                        baseX: gameArea.canvas.width-70,
-                        baseY: gameArea.canvas.height-70,
-              		      limitStickTravel: true,
-              		      stickRadius: 50
-                                 });
-            }
-            // if (gameArea.canvas.requestFullscreen) {
-            //   gameArea.canvas.requestFullscreen();
-            // } else if (gameArea.canvas.msRequestFullscreen) {
-            //   gameArea.canvas.msRequestFullscreen();
-            // } else if (gameArea.canvas.mozRequestFullScreen) {
-            //   gameArea.canvas.mozRequestFullScreen();
-            // } else if (gameArea.canvas.webkitRequestFullscreen) {
-            //   gameArea.canvas.webkitRequestFullscreen();
-            // }
-
         }
 
         function gameManager(){
@@ -187,17 +168,16 @@
             this.controlCheck = function(){
                 this.speedX = 0;
                 this.speedY = 0;
-                if (VirtualJoystick.touchScreenAvailable()) {
-                  if (joystick.left()) {this.speedX = -(5 + manager.charLevelSpeed); } //left
-                  if (joystick.right()) {this.speedX = 5  + manager.charLevelSpeed; } //right
-                  if (joystick.up()) {this.speedY = -(5 + manager.charLevelSpeed); } //up
-                  if (joystick.down()) {this.speedY = 5 + manager.charLevelSpeed; } //down
-                } else {
-                  if (gameArea.keys && gameArea.keys[37]) {this.speedX = -(5 + manager.charLevelSpeed); } //left
-                  if (gameArea.keys && gameArea.keys[39]) {this.speedX = 5  + manager.charLevelSpeed; } //right
-                  if (gameArea.keys && gameArea.keys[38]) {this.speedY = -(5 + manager.charLevelSpeed); } //up
-                  if (gameArea.keys && gameArea.keys[40]) {this.speedY = 5 + manager.charLevelSpeed; } //down
+                if (touch1.on) {
+                  if (touch1.x < 0) {this.speedX = -(5 + manager.charLevelSpeed); } //left
+                  if (touch1.x > 0) {this.speedX = 5  + manager.charLevelSpeed; } //right
+                  if (touch1.y < 0) {this.speedY = -(5 + manager.charLevelSpeed); } //up
+                  if (touch1.y > 0) {this.speedY = 5 + manager.charLevelSpeed; } //down
                 }
+                if (gameArea.keys && gameArea.keys[37]) {this.speedX = -(5 + manager.charLevelSpeed); } //left
+                if (gameArea.keys && gameArea.keys[39]) {this.speedX = 5  + manager.charLevelSpeed; } //right
+                if (gameArea.keys && gameArea.keys[38]) {this.speedY = -(5 + manager.charLevelSpeed); } //up
+                if (gameArea.keys && gameArea.keys[40]) {this.speedY = 5 + manager.charLevelSpeed; } //down
                 this.newPos();
                 edgeCheck(this);
             };
@@ -274,7 +254,7 @@
         {
             ctx.font = "bold 20px Arial";
             ctx.fillStyle = "green";
-            ctx.fillText("Score : "+manager.score, (gameArea.canvas.width/2)-40, 30);
+            ctx.fillText("Score : "+manager.score, gameArea.canvas.width-100, 30);
 
         }
 
@@ -282,7 +262,7 @@
         {
             ctx.font = "bold 20px Arial";
             ctx.fillStyle = "green";
-            ctx.fillText("Level : "+manager.level, 40, 30);
+            ctx.fillText("Level : "+manager.level, 10, 30);
 
         }
 
@@ -293,7 +273,7 @@
         }
 
         function showGameOver(support)
-        {   
+        {
             audio.pause();
             audio.currentTime = 0;
             gameArea.ui.style.display = "block";
@@ -308,7 +288,11 @@
                     localStorage.setItem("highScore", manager.score);
                     ctx.fillText("Your High Score : "+manager.score, (gameArea.canvas.width/2)-170, (gameArea.canvas.height/2)-10);
                 } else {
+                  if(LastScore < 1){
+                    ctx.fillText("Your High Score : 0", (gameArea.canvas.width/2)-170, (gameArea.canvas.height/2)-10);
+                  } else {
                     ctx.fillText("Your High Score : "+LastScore, (gameArea.canvas.width/2)-170, (gameArea.canvas.height/2)-10);
+                  }
                 }
             }
         }
