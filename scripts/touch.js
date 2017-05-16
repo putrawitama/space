@@ -26,7 +26,7 @@ var TouchController = function(canvas) {
 		on : false,
 		x : 0,
 		y : 0,
-		r : 30, // displacement in pixels, used for joystick sensibilty
+		r : 10, // displacement in pixels, used for joystick sensibilty
 		canvas : undefined
 	};
 
@@ -116,4 +116,3 @@ var TouchController = function(canvas) {
 	self.init(canvas);
 	return self;
 };
-
