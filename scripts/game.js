@@ -168,16 +168,16 @@
             this.controlCheck = function(){
                 this.speedX = 0;
                 this.speedY = 0;
-                if (touch1.on) {
-                  if (touch1.x < 0) {this.speedX = -(5 + manager.charLevelSpeed); } //left
-                  if (touch1.x > 0) {this.speedX = 5  + manager.charLevelSpeed; } //right
-                  if (touch1.y < 0) {this.speedY = -(5 + manager.charLevelSpeed); } //up
-                  if (touch1.y > 0) {this.speedY = 5 + manager.charLevelSpeed; } //down
-                }
-                if (gameArea.keys && gameArea.keys[37]) {this.speedX = -(5 + manager.charLevelSpeed); } //left
-                if (gameArea.keys && gameArea.keys[39]) {this.speedX = 5  + manager.charLevelSpeed; } //right
-                if (gameArea.keys && gameArea.keys[38]) {this.speedY = -(5 + manager.charLevelSpeed); } //up
-                if (gameArea.keys && gameArea.keys[40]) {this.speedY = 5 + manager.charLevelSpeed; } //down
+                // if (touch1.on) {
+                //   if (touch1.x < 0) {this.speedX = -(5 + manager.charLevelSpeed); } //left
+                //   if (touch1.x > 0) {this.speedX = 5  + manager.charLevelSpeed; } //right
+                //   if (touch1.y < 0) {this.speedY = -(5 + manager.charLevelSpeed); } //up
+                //   if (touch1.y > 0) {this.speedY = 5 + manager.charLevelSpeed; } //down
+                // }
+                if (gameArea.keys && gameArea.keys[37] || touch1.x < 0) {this.speedX = -(5 + manager.charLevelSpeed); } //left
+                if (gameArea.keys && gameArea.keys[39] || touch1.x > 0) {this.speedX = 5  + manager.charLevelSpeed; } //right
+                if (gameArea.keys && gameArea.keys[38] || touch1.y < 0) {this.speedY = -(5 + manager.charLevelSpeed); } //up
+                if (gameArea.keys && gameArea.keys[40] || touch1.y > 0) {this.speedY = 5 + manager.charLevelSpeed; } //down
                 this.newPos();
                 edgeCheck(this);
             };
