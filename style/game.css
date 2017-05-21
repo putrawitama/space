@@ -22,6 +22,13 @@ body{
     box-sizing: border-box;
     background:none;
   }
+  .stat {
+    border-radius: 25px;
+    border: 2px solid #fff;
+    padding: 20px;
+    margin-bottom: 5px;
+    margin-top: 5%;
+  }
   .button { /* Green */
       background: none;
       border-color: white;
@@ -45,19 +52,18 @@ body{
 
   .cover{
     background: none;
-    text-align: center;
     color: white;
   }
-
   .gameOver {
     display : none;
-    transform: translate(-50%, -50%);
-    position: absolute;
-    left: 50%;
-    top: 50%;
+  }
+
+  .gameEnd {
+    text-align: center;
   }
 
   .play {
+    text-align: center;
     display : block;
   }
   /*.ui{

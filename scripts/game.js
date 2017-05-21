@@ -39,6 +39,7 @@
                this.canvas.height = h;
                touch1 = TouchController(this.canvas);
                this.ui = document.getElementById("ui");
+               this.inName = document.getElementById("playerName");
                this.ui.style.display = "none";
                this.cover = document.getElementById("cover");
                this.cover.style.display = "none";
@@ -81,6 +82,7 @@
 ||======================================================================================================================
 */
         function startGame(){
+            gameArea.canvas.style.display = "block";
             gameArea.start();
             gameArea.cover.style.display = "none";
             manager = new gameManager();
@@ -267,9 +269,19 @@
         }
 
         function save() {
-            var val = document.getElementById("playerName").value;
-            localStorage.setItem("name", val);
-            console.log('sukses masukinnya');
+
+            if (typeof(Storage) !== "undefined") {
+              if(localStorage.getItem("name") == null){
+                var val = document.getElementById("playerName").value;
+                localStorage.setItem("name", val);
+                document.getElementById("playerName").style.display = "none";
+                console.log('sukses masukinnya');
+              }
+            } else {
+                // Sorry! No Web Storage support..
+                window.alert("Maaf, Browser anda tidak support untuk menyimpan, Lanjutkan?");
+                support = false;
+            }
         }
 
         function showGameOver(support)
@@ -277,25 +289,27 @@
             audio.pause();
             audio.currentTime = 0;
             gameArea.ui.style.display = "block";
-            gameArea.ui.style.position = "absolute";
-            ctx.font = "bold 40px Arial";
-            ctx.fillStyle = "white";
-            ctx.fillText("Game Over", (gameArea.canvas.width/2)-110, (gameArea.canvas.height/2)-70);
-            ctx.fillText("Your Score : "+manager.score, (gameArea.canvas.width/2)-125, (gameArea.canvas.height/2)-40);
+            // ctx.font = "bold 40px Arial";
+            // ctx.fillStyle = "white";
+            // ctx.fillText("Game Over", (gameArea.canvas.width/2)-110, (gameArea.canvas.height/2)-70);
+            // ctx.fillText("Your Score : "+manager.score, (gameArea.canvas.width/2)-125, (gameArea.canvas.height/2)-40);
+            document.getElementById("score").innerHTML = manager.score;
+            document.getElementById("level").innerHTML = manager.level;
             if (support) {
                 // Code for localStorage/sessionStorage.
                 var LastScore = localStorage.getItem("highScore");
                 if(LastScore < manager.score){
                     localStorage.setItem("highScore", manager.score);
-                    ctx.fillText("Your High Score : "+manager.score, (gameArea.canvas.width/2)-170, (gameArea.canvas.height/2)-10);
+                    document.getElementById("high").innerHTML = manager.score;
                 } else {
                   if(LastScore < 1){
-                    ctx.fillText("Your High Score : 0", (gameArea.canvas.width/2)-170, (gameArea.canvas.height/2)-10);
+                    document.getElementById("high").innerHTML = 0;
                   } else {
-                    ctx.fillText("Your High Score : "+LastScore, (gameArea.canvas.width/2)-170, (gameArea.canvas.height/2)-10);
+                    document.getElementById("high").innerHTML = LastScore;
                   }
                 }
             }
+            gameArea.canvas.style.display = "none";
         }
 
         function consumableComponent(width, height, color, x, y){
