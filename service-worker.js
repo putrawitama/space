@@ -37,7 +37,7 @@
 /* eslint-disable indent, no-unused-vars, no-multiple-empty-lines, max-nested-callbacks, space-before-function-paren, quotes, comma-spacing */
 'use strict';
 
-var precacheConfig = [["image/cover.png","1480d832f73029826bce8e5842a95947"],["index.html","71d58d2ce57bf8bdb6a82f480fbf4fe5"],["scripts/game.js","4e96f59562bd6bdecf4ad0f4d968b8a5"],["scripts/touch.js","be75a5a975e5c52b493966446b858463"],["scripts/virtualjoystick.js","86c41de54aaf264ada128bac4db5eccd"],["sounds/backsound.mp3","28a546a6f79b783465747e1c11ddb72c"],["style/game.css","1103b36a13e77b77ba5157d08e0918aa"]];
+var precacheConfig = [["image/cover.png","1480d832f73029826bce8e5842a95947"],["index.html","0961309ddba491f5f180395addb0e694"],["scripts/game.js","50a09174a1331ce0d2c36118a5128bb6"],["scripts/touch.js","e558c2cdf18064e5e545ef5a660ea4f9"],["scripts/virtualjoystick.js","86c41de54aaf264ada128bac4db5eccd"],["sounds/backsound.mp3","28a546a6f79b783465747e1c11ddb72c"],["style/bootstrap.min.css","7e923ad223e9f33e54d22e50cf2bcce5"],["style/bootstrap.min.css.map","6b6dac70b48f4e1d8223f383d58b1976"],["style/game.css","c93532192e64ed42ab16af32b12c5dc6"]];
 var cacheName = 'sw-precache-v3-sw-precache-' + (self.registration ? self.registration.scope : '');
 
 

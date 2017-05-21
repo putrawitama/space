@@ -1,6 +1,7 @@
 module.exports = {
   staticFileGlobs: [
     'style/**.css',
+    'style/**.map',
     'image/cover.png',
     '**.html',
     'sounds/**.*',

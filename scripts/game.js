@@ -277,6 +277,7 @@
             audio.pause();
             audio.currentTime = 0;
             gameArea.ui.style.display = "block";
+            gameArea.ui.style.position = "absolute";
             ctx.font = "bold 40px Arial";
             ctx.fillStyle = "white";
             ctx.fillText("Game Over", (gameArea.canvas.width/2)-110, (gameArea.canvas.height/2)-70);
