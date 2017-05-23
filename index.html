@@ -80,13 +80,16 @@
         </div>
         <div class="row">
           <div class="col">
-            <button onclick="back()" class="button"><i class="fa fa-home" aria-hidden="true"></i> Main Menu</button>
+            <button onclick="back()" class="button"><i class="fa fa-home" aria-hidden="true"></i></button>
           </div>
           <div class="col">
-            <button onclick="back2()" class="button"><i class="fa fa-cog" aria-hidden="true"></i> Setting</button>
+            <button onclick="back2()" class="button"><i class="fa fa-cog" aria-hidden="true"></i></button>
           </div>
           <div class="col">
-            <button onclick="startGame()" id="retry" class="button"><i class="fa fa-repeat" aria-hidden="true"></i> Retry</button>
+            <button onclick="chart()" class="button"><i class="fa fa-bar-chart" aria-hidden="true"></i></button>
+          </div>
+          <div class="col">
+            <button onclick="startGame()" id="retry" class="button"><i class="fa fa-repeat" aria-hidden="true"></i></button>
           </div>
         </div>
       </div>
@@ -278,6 +281,31 @@
     </div>
   </div>
 
+
+  <!-- ini diagram -->
+  <div id="chart" class="container cover gameOver">
+    <div class="row align-items-center">
+      <div class="col-sm-10 offset-sm-1 col-md-10 offset-md-1">
+        <div class="stat">
+          <div class="gameEnd">
+            <h4>DIAGRAM</h4>
+            <p>Grafik dari semua player</p>
+          </div>
+          <div class="row">
+            <div class="col">
+              <h1>TARUH DISINI CHARTNYA</h1>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-3 col-sm-3 col-md-3">
+            <button onclick="toSetting()" class="button"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- ini tombol pause -->
   <div id="pause" class="pause">
     <button id="pauseBtn" class="btnPause fa fa-pause" onclick="pause()"></button>
@@ -295,6 +323,16 @@
     }
   </script> -->
   <script type="text/javascript">
+
+    function toGame() {
+      document.getElementById("ui").style.display = "block";
+      document.getElementById("chart").style.display = "none";
+    }
+
+    function chart(){
+      document.getElementById("ui").style.display = "none";
+      document.getElementById("chart").style.display = "block";
+    }
 
     function setting() {
       document.getElementById("cover").style.display = "none";
