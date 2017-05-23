@@ -23,7 +23,7 @@
         var defaultLaser = "#E53935";
         var defaultItem = "#8BC34A";
         var audioIsPaused = false;
-        
+
 
         var player;
         var lbH;
@@ -38,6 +38,7 @@
         var text;
         var id = new Array;
         var i=0;
+        var r;
         var audio = new Audio('sounds/backsound.mp3');
         var gameArea = {
             // title : "spacelimit",
@@ -296,20 +297,17 @@
           }
         }
 
-        function save() {
-
-            if (typeof(Storage) !== "undefined") {
-              if(localStorage.getItem("name") == null){
-                var val = document.getElementById("playerName").value;
-                localStorage.setItem("name", val);
-                document.getElementById("playerName").style.display = "none";
-                console.log('sukses masukinnya');
-              }
+        function submit() {
+          if (document.getElementById("playerName").value == null) {
+            alert("masukkan nama");
+          } else {
+            if (localStorage.getItem("sumData") == null) {
+              r = 1;
             } else {
-                // Sorry! No Web Storage support..
-                window.alert("Maaf, Browser anda tidak support untuk menyimpan, Lanjutkan?");
-                support = false;
+              r = parseInt(localStorage.getItem("sumData")) + 1;
             }
+            startGame();
+          }
         }
 
         function showGameOver(support)
@@ -325,45 +323,42 @@
             document.getElementById("level").innerHTML = manager.level;
             if (support) {
                 var val = document.getElementById("playerName").value;
-                id[i] = {
-                  "name" : val,
-                  "score" : manager.score
-                };
-                text = JSON.stringify(id[i]);
-                localStorage.setItem("id["+i+"]", text);
-                // else {
-                //   var parse = JSON.parse(localStorage.getItem("id["+i+"]"))
-                //   id[i] = {
-                //     "name" : id[i].name,
-                //     "score" : manager.score
-                //   };
-                //   text = JSON.stringify(id[i]);
-                //   localStorage.setItem("id["+i+"]", text);
-                // }
-                // console.log(localStorage.getItem("id["+i+"]"));
                 // Code for localStorage/sessionStorage.
-                var LastScore = JSON.parse(localStorage.getItem("id["+i+"]");
-                if(LastScore.score < manager.score){
-                    id[i] = {
-                      "name" : LastScore.name,
-                      "score" : manager.score
-                    };
-                    text = JSON.stringify(id[i]);
-                    localStorage.setItem("id["+i+"]", text);
-                    document.getElementById("high").innerHTML = manager.score;
+                var data = JSON.parse(localStorage.getItem("id["+r+"]"));
+                console.log("wes"+JSON.stringify(data));
+                if (data == null) {
+                  id[r] = {
+                    "player" : r,
+                    "name" : val,
+                    "score" : manager.score
+                  };
+                  text = JSON.stringify(id[r]);
+                  localStorage.setItem("id["+r+"]", text);
+                  document.getElementById("high").innerHTML = manager.score;
                 } else {
-                  if(LastScore.score < 1){
-                    document.getElementById("high").innerHTML = 0;
+                  if(data.score < manager.score){
+                      id[r] = {
+                        "player" : data.player,
+                        "name" : data.name,
+                        "score" : manager.score
+                      };
+                      text = JSON.stringify(id[r]);
+                      localStorage.setItem("id["+r+"]", text);
+                      document.getElementById("high").innerHTML = manager.score;
+                      console.log("ini sesudah"+JSON.stringify(id[r]));
                   } else {
-                    document.getElementById("high").innerHTML = LastScore.score;
+                    if(data.score < 1){
+                      document.getElementById("high").innerHTML = 0;
+                    } else {
+                      document.getElementById("high").innerHTML = data.score;
+                    }
+                    console.log("ini beda"+JSON.stringify(data));
                   }
-                }
-                if ('null' != val) {
-                  i+=1;
                 }
             }
             gameArea.canvas.style.display = "none";
             document.getElementById("pause").style.display="none";
+            localStorage.setItem("sumData", r);
         }
 
         function consumableComponent(width, height, color, x, y){
@@ -405,8 +400,8 @@
             };
             this.collisionHandler = function(){
                 // move
-                this.x = Math.floor(Math.random()*gameArea.canvas.width)+1;
-                this.y = Math.floor(Math.random()*gameArea.canvas.height)+1;
+                this.x = Math.floor(Math.random()*(gameArea.canvas.width)-5)+1;
+                this.y = Math.floor(Math.random()*(gameArea.canvas.height)-5)+1;
                 this.left = this.x;
                 this.right = this.x + this.width;
                 this.top = this.y;
@@ -425,7 +420,7 @@
 ||      - Turn on/off audio
 ||======================================================================================================================
 ||======================================================================================================================
-*/        
+*/
         function changeColor(target, hex){
             var color;
             var tCaption;
@@ -460,7 +455,7 @@
                     color = "Magenta";
                     break;
             }
-            
+
             switch (target) {
                 case "cplayer":
                     defaultPlayer = hex;
@@ -490,7 +485,7 @@
                     audioIsPaused = true;
                     break;
             }
-            
+
             document.getElementById('caudio').innerHTML = "Music: "+toggleSwitch;
         }
 
