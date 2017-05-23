@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="style/font-awesome.min.css">
     <script type="text/javascript" src="scripts/touch.js"></script>
     <script type="text/javascript" src="scripts/game.js"></script>
+    <script type="text/javascript" src="scripts/Chart.min.js"></script>
 </head>
 <body>
 
@@ -293,7 +294,7 @@
           </div>
           <div class="row">
             <div class="col">
-              <h1>TARUH DISINI CHARTNYA</h1>
+              <canvas id="lineChart" width="400" height="400"></canvas>
             </div>
           </div>
         </div>
@@ -366,6 +367,38 @@
   </script>
   <script src="https://apis.google.com/js/platform.js" async defer>
   {lang: 'id'}
-</script>
+  </script>
+  <script>
+    var i = localStorage.getItem("sumData");
+    var player=[];
+    var score=[];
+    var d;
+    for (var l = 1; l <= i; l++) {
+      d = localStorage.getItem("id["+l+"]");
+      // player.push(d.name);
+      // score.push(d.score); 
+      console.log(d.name);
+      console.log(d.score);
+      player[l]=d.name;
+      score[l]=d.score;
+    }
+    console.log(score);
+    console.log(player);
+    var lineChart = {
+      labels: player,
+      datasets: [
+        {
+          label : 'Player High Score',
+          data: score
+        }
+      ] 
+    };
+
+    var ctx = document.getElementById("lineChart");
+    var barGraph = new Chart(ctx,{
+      type: 'bar',
+      data: lineChart
+    });
+  </script>
 </body>
 </html>
