@@ -298,7 +298,7 @@
         }
 
         function submit() {
-          if (document.getElementById("playerName").value == null) {
+          if (document.getElementById("playerName").value == "") {
             alert("masukkan nama");
           } else {
             if (localStorage.getItem("sumData") == null) {
