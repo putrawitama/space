@@ -87,7 +87,7 @@
             <button onclick="back2()" class="button"><i class="fa fa-cog" aria-hidden="true"></i></button>
           </div>
           <div class="col">
-            <button onclick="chart()" class="button"><i class="fa fa-bar-chart" aria-hidden="true"></i></button>
+            <button onclick="chart(); showChart()" class="button"><i class="fa fa-bar-chart" aria-hidden="true"></i></button>
           </div>
           <div class="col">
             <button onclick="startGame()" id="retry" class="button"><i class="fa fa-repeat" aria-hidden="true"></i></button>
@@ -287,14 +287,10 @@
   <div id="chart" class="container cover gameOver">
     <div class="row align-items-center">
       <div class="col-sm-10 offset-sm-1 col-md-10 offset-md-1">
-        <div class="stat">
-          <div class="gameEnd">
-            <h4>DIAGRAM</h4>
-            <p>Grafik dari semua player</p>
-          </div>
+        <div class="stat diagram">
           <div class="row">
             <div class="col">
-              <canvas id="lineChart" width="400" height="400"></canvas>
+              <canvas id="lineChart"></canvas>
             </div>
           </div>
         </div>
@@ -311,7 +307,7 @@
   <div id="pause" class="pause">
     <button id="pauseBtn" class="btnPause fa fa-pause" onclick="pause()"></button>
   </div>
-  <!-- <script>
+  <script>
     if('serviceWorker' in navigator) {
       navigator.serviceWorker.register('service-worker.js', { scope: '/space/' })
         .then(function(registration) {
@@ -322,7 +318,7 @@
          console.log('Service Worker Ready');
       });
     }
-  </script> -->
+  </script>
   <script type="text/javascript">
 
     function toGame() {
@@ -367,38 +363,6 @@
   </script>
   <script src="https://apis.google.com/js/platform.js" async defer>
   {lang: 'id'}
-  </script>
-  <script>
-    var i = localStorage.getItem("sumData");
-    var player=[];
-    var score=[];
-    var d;
-    for (var l = 1; l <= i; l++) {
-      d = localStorage.getItem("id["+l+"]");
-      // player.push(d.name);
-      // score.push(d.score); 
-      console.log(d.name);
-      console.log(d.score);
-      player[l]=d.name;
-      score[l]=d.score;
-    }
-    console.log(score);
-    console.log(player);
-    var lineChart = {
-      labels: player,
-      datasets: [
-        {
-          label : 'Player High Score',
-          data: score
-        }
-      ] 
-    };
-
-    var ctx = document.getElementById("lineChart");
-    var barGraph = new Chart(ctx,{
-      type: 'bar',
-      data: lineChart
-    });
   </script>
 </body>
 </html>

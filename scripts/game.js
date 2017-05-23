@@ -39,6 +39,8 @@
         var id = new Array;
         var i=0;
         var r;
+        var user=[];
+        var hScore=[];
         var audio = new Audio('sounds/backsound.mp3');
         var gameArea = {
             // title : "spacelimit",
@@ -302,7 +304,7 @@
             alert("masukkan nama");
           } else {
             if (localStorage.getItem("sumData") == null) {
-              r = 1;
+              r = 0;
             } else {
               r = parseInt(localStorage.getItem("sumData")) + 1;
             }
@@ -332,6 +334,8 @@
                     "name" : val,
                     "score" : manager.score
                   };
+                  // user[r]=id[r].name;
+                  // hScore[r]=id[r].score;
                   text = JSON.stringify(id[r]);
                   localStorage.setItem("id["+r+"]", text);
                   document.getElementById("high").innerHTML = manager.score;
@@ -342,6 +346,8 @@
                         "name" : data.name,
                         "score" : manager.score
                       };
+                      // user[r]=data.name;
+                      // hScore[r]=manager.score;
                       text = JSON.stringify(id[r]);
                       localStorage.setItem("id["+r+"]", text);
                       document.getElementById("high").innerHTML = manager.score;
@@ -359,6 +365,39 @@
             gameArea.canvas.style.display = "none";
             document.getElementById("pause").style.display="none";
             localStorage.setItem("sumData", r);
+        }
+
+        function showChart() {
+
+          var i = parseInt(localStorage.getItem("sumData"));
+          var d;
+          for (var l = 0; l <= i; l++) {
+            d = JSON.parse(localStorage.getItem("id["+l+"]"));
+            user[l] = d.name;
+            hScore[l] = d.score;
+          }
+
+          var lineChart = {
+            labels: user,
+            datasets: [
+              {
+                label : 'Player High Score',
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor:'rgba(255,99,132,1)',
+                borderWidth: 1,
+                scaleSteps : 1,
+                data: hScore
+              }
+            ]
+          };
+
+          var diag = document.getElementById("lineChart");
+          diag.width = window.innerWidth;
+          diag.height = window.innerHeight;
+          var barGraph = new Chart(diag,{
+            type: 'bar',
+            data: lineChart
+          });
         }
 
         function consumableComponent(width, height, color, x, y){
