@@ -83,6 +83,7 @@
 */
         function startGame(){
             gameArea.canvas.style.display = "block";
+            document.getElementById("pause").style.display="block";
             gameArea.start();
             gameArea.cover.style.display = "none";
             manager = new gameManager();
@@ -255,16 +256,16 @@
         function showScore()
         {
             ctx.font = "bold 20px Arial";
-            ctx.fillStyle = "green";
-            ctx.fillText("Score : "+manager.score, gameArea.canvas.width-100, 30);
+            ctx.fillStyle = "white";
+            ctx.fillText("Score : "+manager.score, gameArea.canvas.width-100, 60);
 
         }
 
         function showLevel()
         {
             ctx.font = "bold 20px Arial";
-            ctx.fillStyle = "green";
-            ctx.fillText("Level : "+manager.level, 10, 30);
+            ctx.fillStyle = "white";
+            ctx.fillText("Level : "+manager.level, gameArea.canvas.width-100, 30);
 
         }
 
@@ -310,6 +311,7 @@
                 }
             }
             gameArea.canvas.style.display = "none";
+            document.getElementById("pause").style.display="none";
         }
 
         function consumableComponent(width, height, color, x, y){

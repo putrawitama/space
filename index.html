@@ -10,17 +10,18 @@
     <link rel="icon" type="image/png" href="image/launcher-icon-0-75x.png" />
     <link rel="stylesheet" href="style/game.css">
     <link rel="stylesheet" href="style/bootstrap.min.css">
+    <link rel="stylesheet" href="style/font-awesome.min.css">
     <script type="text/javascript" src="scripts/touch.js"></script>
     <script type="text/javascript" src="scripts/game.js"></script>
 </head>
 <body>
-  <div class="container cover">
+  <div id="cover" class="container cover">
     <div class="row align-items-center">
       <div class="col-sm-6 offset-sm-3 col-md-10 offset-md-1">
-        <div class="play" id="cover">
+        <div class="play">
           <img src="image/cover.png" class="imgCover">
           <input type="text" class="txt" id="playerName" placeholder="input player name .."></input>
-          <button class="button" onclick="startGame(); save()">Play</button>
+          <button class="button" onclick="startGame(); save()"><i class="fa fa-play" aria-hidden="true"></i></button>
         </div>
       </div>
     </div>
@@ -57,9 +58,19 @@
             <iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fputrawitama.github.io%2Fspace%2F&layout=button&size=large&mobile_iframe=true&appId=1957520571137976&width=87&height=28" width="87" height="28" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
           </div>
         </div>
-        <button onclick="startGame()" id="retry" class="button">Play Again</button>
+        <div class="row">
+          <div class="col">
+            <button onclick="menu()" class="button">Main Menu</button>
+          </div>
+          <div class="col">
+            <button onclick="startGame()" id="retry" class="button"><i class="fa fa-repeat" aria-hidden="true"></i></button>
+          </div>
+        </div>
       </div>
     </div>
+  </div>
+  <div id="pause" class="pause">
+    <button class="btnPause fa fa-pause"></button>
   </div>
   <!-- <script>
     if('serviceWorker' in navigator) {
@@ -73,6 +84,12 @@
       });
     }
   </script> -->
+  <script type="text/javascript">
+    function menu() {
+      document.getElementById("ui").style.display = "none";
+      document.getElementById("cover").style.display = "block";
+    }
+  </script>
   <script src="https://apis.google.com/js/platform.js" async defer>
   {lang: 'id'}
 </script>

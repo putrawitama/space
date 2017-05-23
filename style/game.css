@@ -42,12 +42,39 @@ body{
       border-radius: 30px;
       width: 100%;
   }
+  .btnPause {
+    background: none;
+    border-color: white;
+    color: white;
+    padding: 10px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 30px;
+  }
+
+  .btnPause:hover {
+    background-color: white;
+    color: black;
+  }
+
   .button:hover {
       background-color: white;
       color: black;
   }
   .title {
     color: white;
+  }
+
+  .pause {
+    top: 0;
+    position: absolute;
+    display:none;
+    width: 20px;
+    height: 20px;
+    margin-top: 10px;
+    margin-left: 10px;
   }
 
   .cover{
