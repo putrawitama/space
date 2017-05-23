@@ -23,11 +23,13 @@ body{
     background:none;
   }
   .stat {
+    overflow-y: scroll;
     border-radius: 25px;
     border: 2px solid #fff;
     padding: 20px;
     margin-bottom: 5px;
     margin-top: 5%;
+    height: 230px;
   }
   .button { /* Green */
       background: none;
