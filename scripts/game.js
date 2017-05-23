@@ -19,6 +19,12 @@
 ||======================================================================================================================
 ||======================================================================================================================
 */
+        var defaultPlayer = "#EEEEEE";
+        var defaultLaser = "#E53935";
+        var defaultItem = "#8BC34A";
+        var audioIsPaused = false;
+        
+
         var player;
         var lbH;
         var lbV;
@@ -91,15 +97,15 @@
             gameArea.start();
             gameArea.cover.style.display = "none";
             manager = new gameManager();
-            player = new playerComponent(20, 20, "yellow", 10, 120);
-            lbH = new laserbeamComponent(gameArea.canvas.width, 5, "red", 0, 10, "horizontal");
-            lbV = new laserbeamComponent(5, gameArea.canvas.height, "red", 70, 0, "vertical");
-            consumable = new consumableComponent(10, 10, "blue", 100, 120);
+            player = new playerComponent(20, 20, defaultPlayer, 10, 120);
+            lbH = new laserbeamComponent(gameArea.canvas.width, 5, defaultLaser, 0, 10, "horizontal");
+            lbV = new laserbeamComponent(5, gameArea.canvas.height, defaultLaser, 70, 0, "vertical");
+            consumable = new consumableComponent(10, 10, defaultItem, 100, 120);
             audio.addEventListener('ended', function() {
                 this.currentTime = 0;
                 this.play();
             }, false);
-            audio.play();
+            if(!audioIsPaused){audio.play();}else{audio.pause();}
             if (typeof(Storage) !== "undefined") {
                 support = true;
             } else {
@@ -380,6 +386,84 @@
                 // add score
                 manager.score += 1;
             };
+        }
+
+/**=====================================================================================================================
+||======================================================================================================================
+||  SETTINGS
+||      - Ganti warna player
+||      - Ganti warna laser
+||      - Ganti warna item
+||      - Turn on/off audio
+||======================================================================================================================
+||======================================================================================================================
+*/        
+        function changeColor(target, hex){
+            var color;
+            var tCaption;
+            var caption = document.getElementById(target);
+
+            switch(hex) {
+                case "#E53935":
+                    color = "Red";
+                    break;
+                case "#00ACC1":
+                    color = "Blue";
+                    break;
+                case "#8BC34A":
+                    color = "Green";
+                    break;
+                case "#EEEEEE":
+                    color = "White";
+                    break;
+                case "#FFF176":
+                    color = "Yellow";
+                    break;
+                case "#9575CD":
+                    color = "Purple";
+                    break;
+                case "#616161":
+                    color = "Dark";
+                    break;
+                case "#8D6E63":
+                    color = "Brown";
+                    break;
+                case "#EC407A":
+                    color = "Magenta";
+                    break;
+            }
+            
+            switch (target) {
+                case "cplayer":
+                    defaultPlayer = hex;
+                    tCaption = "Player";
+                    break;
+                case "claser":
+                    defaultLaser = hex;
+                    tCaption = "Laserbeam";
+                    break;
+                case "citem":
+                    defaultItem = hex;
+                    tCaption = "Item";
+                    break;
+            }
+
+            caption.innerHTML = tCaption+": "+color;
+        }
+
+        function toggleAudio(toggleSwitch){
+            switch (toggleSwitch) {
+                case "On":
+                    audio.play();
+                    audioIsPaused = false;
+                    break;
+                case "Off":
+                    audio.pause();
+                    audioIsPaused = true;
+                    break;
+            }
+            
+            document.getElementById('caudio').innerHTML = "Music: "+toggleSwitch;
         }
 
 /**=====================================================================================================================

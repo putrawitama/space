@@ -44,6 +44,55 @@ body{
       border-radius: 30px;
       width: 100%;
   }
+
+  .red {
+      background-color: #E53935;
+  }
+
+  .blue {
+      background-color: #00ACC1;
+  }
+
+  .green {
+      background-color: #8BC34A;
+  }
+
+  .white {
+      background-color: #EEEEEE;
+  }
+
+  .yellow {
+      background-color: #FFF176;
+  }
+
+  .purple {
+      background-color: #9575CD;
+  }
+
+  .dark {
+      background-color: #616161;
+  }
+
+  .brown {
+      background-color: #8D6E63;
+  }
+
+  .magenta {
+      background-color: #EC407A;
+  }
+
+  .btn-vol{
+    padding-top: 20px;
+  }
+
+  .bordered-right{
+    border-right: solid 2px;
+  }
+
+  .bordered-left{
+    border-left: solid 2px;
+  }
+
   .btnPause {
     background: none;
     border-color: white;

@@ -98,6 +98,63 @@
           <div class="gameEnd">
             <h4>SETTING</h4>
           </div>
+          <div class="row">
+            <div class="col-4 bordered-right">
+              <h6 id="cplayer">Player: White</h6>
+              <div class="row">
+                <div class="col-4">
+                  <button class="button white" onclick="changeColor('cplayer', '#EEEEEE')"></button>
+                </div>
+                <div class="col-4">
+                  <button class="button purple" onclick="changeColor('cplayer', '#9575CD')"></button>
+                </div>
+                <div class="col-4">
+                  <button class="button blue" onclick="changeColor('cplayer', '#00ACC1')"></button>
+                </div>
+              </div>
+            </div>
+            <div class="col-4 bordered-right">
+              <h6 id="claser">Laserbeam: Red</h6>
+              <div class="row">
+                <div class="col-4">
+                  <button class="button red" onclick="changeColor('claser', '#E53935')"></button>
+                </div>
+                <div class="col-4">
+                  <button class="button yellow" onclick="changeColor('claser', '#FFF176')"></button>
+                </div>
+                <div class="col-4">
+                  <button class="button dark" onclick="changeColor('claser', '#616161')"></button>
+                </div>
+              </div>
+            </div>
+            <div class="col-4 bordered">
+              <h6 id="citem">Item: Green</h6>
+              <div class="row">
+                <div class="col-4">
+                  <button class="button green" onclick="changeColor('citem', '#8BC34A')"></button>
+                </div>
+                <div class="col-4">
+                  <button class="button magenta" onclick="changeColor('citem', '#EC407A')"></button>
+                </div>
+                <div class="col-4">
+                  <button class="button brown" onclick="changeColor('citem', '#8D6E63')"></button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="btn-vol row">
+              <div class="col-4">
+                  <h6 id="caudio">Music: On</h6>
+                  <div class="row">
+                    <div class="col-6">
+                      <button class="button" onclick="toggleAudio('On')">On</button>
+                    </div>
+                    <div class="col-6">
+                      <button class="button" onclick="toggleAudio('Off')">Off</button>
+                    </div>
+                  </div>
+              </div>
+            </div>
         </div>
         <div class="row">
           <div class="col-3 col-sm-3 col-md-3">
