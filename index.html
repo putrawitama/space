@@ -38,7 +38,7 @@
               <button class="button" onclick="about()"><i class="fa fa-info" aria-hidden="true"></i></button>
             </div>
             <div class="col-2">
-              <button class="button" onclick=""><i class="fa fa-download" aria-hidden="true"></i></button>
+              <button class="button" onclick="download()"><i class="fa fa-download" aria-hidden="true"></i></button>
             </div>
           </div>
         </div>
@@ -215,6 +215,40 @@
     </div>
   </div>
 
+  <!-- ini help -->
+  <div id="download" class="container cover gameOver">
+    <div class="row align-items-center">
+      <div class="col-sm-10 offset-sm-1 col-md-10 offset-md-1">
+        <div class="stat">
+          <div class="gameEnd">
+            <h4>Download</h4>
+          </div>
+          <div class="row">
+            <div class="col">
+              <p><strong><i class="fa fa-desktop" aria-hidden="true"></i> Desktop</strong></p>
+              <ul style="list-style-type:none">
+                <li><a href="/install/Setup.exe">setup.exe</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <p><strong><i class="fa fa-mobile" aria-hidden="true"></i> Android</strong></p>
+              <ul style="list-style-type:none">
+                <li><a href="/install/SpaceLimit.apk">SpaceLimit.apk</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-3 col-sm-3 col-md-3">
+            <button onclick="back()" class="button"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- ini ABOUT -->
   <div id="about" class="container cover gameOver">
     <div class="row align-items-center">
@@ -331,6 +365,10 @@
       document.getElementById("chart").style.display = "block";
     }
 
+    function download() {
+      document.getElementById("download").style.display = "block";
+      document.getElementById("cover").style.display = "none";
+    }
     function setting() {
       document.getElementById("cover").style.display = "none";
       document.getElementById("setting").style.display = "block";
@@ -344,6 +382,7 @@
       document.getElementById("about").style.display = "block";
     }
     function back() {
+      document.getElementById("download").style.display = "none";
       document.getElementById("ui").style.display = "none";
       document.getElementById("setting").style.display = "none";
       document.getElementById("help").style.display = "none";
