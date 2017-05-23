@@ -28,11 +28,13 @@
         var support;
         var name;
         var touch1;
+        var isPaused;
         var audio = new Audio('sounds/backsound.mp3');
         var gameArea = {
             // title : "spacelimit",
             canvas : document.createElement("canvas"),
             start : function(){
+               isPaused = false;
                var w = window.innerWidth-2; // -2 accounts for the border
                var h = window.innerHeight-2;
                this.canvas.width = w;
@@ -47,9 +49,11 @@
                document.body.insertBefore(this.ui, document.body.childNodes[0]);
                document.body.insertBefore(this.canvas, document.body.childNodes[1]);
                this.interval = setInterval(function(){
+                 if (!isPaused) {
                    lbH.move();
                    lbV.move();
                    updateGameArea();
+                 }
                }, 20);
 
                window.addEventListener('keydown', function (e) {
@@ -267,6 +271,20 @@
             ctx.fillStyle = "white";
             ctx.fillText("Level : "+manager.level, gameArea.canvas.width-100, 30);
 
+        }
+
+        function pause() {
+          if (isPaused) {
+            audio.play();
+            isPaused = false;
+            document.getElementById("pauseBtn").classList.remove('fa-play');
+            document.getElementById("pauseBtn").classList.add('fa-pause');
+          } else {
+            audio.pause();
+            isPaused = true;
+            document.getElementById("pauseBtn").classList.add('fa-play');
+            document.getElementById("pauseBtn").classList.remove('fa-pause');
+          }
         }
 
         function save() {

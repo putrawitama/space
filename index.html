@@ -15,17 +15,37 @@
     <script type="text/javascript" src="scripts/game.js"></script>
 </head>
 <body>
+
+  <!-- ini cover -->
   <div id="cover" class="container cover">
     <div class="row align-items-center">
       <div class="col-sm-6 offset-sm-3 col-md-10 offset-md-1">
         <div class="play">
           <img src="image/cover.png" class="imgCover">
           <input type="text" class="txt" id="playerName" placeholder="input player name .."></input>
-          <button class="button" onclick="startGame(); save()"><i class="fa fa-play" aria-hidden="true"></i></button>
+          <div class="row">
+            <div class="col col-sm-4 col-md-4">
+              <button class="button" onclick="startGame(); save()"><i class="fa fa-play" aria-hidden="true"></i></button>
+            </div>
+            <div class="col col-sm-2 col-md-2">
+              <button class="button" onclick="setting()"><i class="fa fa-cog" aria-hidden="true"></i></button>
+            </div>
+            <div class="col col-sm-2 col-md-2">
+              <button class="button" onclick="help()"><i class="fa fa-question" aria-hidden="true"></i></button>
+            </div>
+            <div class="col col-sm-2 col-md-2">
+              <button class="button" onclick="about()"><i class="fa fa-info" aria-hidden="true"></i></button>
+            </div>
+            <div class="col col-sm-2 col-md-2">
+              <button class="button" onclick=""><i class="fa fa-download" aria-hidden="true"></i></button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- ini game over -->
   <div id="ui" class="container cover gameOver">
     <div class="row align-items-center">
       <div class="col-sm-10 offset-sm-1 col-md-10 offset-md-1">
@@ -60,7 +80,7 @@
         </div>
         <div class="row">
           <div class="col">
-            <button onclick="menu()" class="button">Main Menu</button>
+            <button onclick="back()" class="button">Main Menu</button>
           </div>
           <div class="col">
             <button onclick="startGame()" id="retry" class="button"><i class="fa fa-repeat" aria-hidden="true"></i></button>
@@ -69,8 +89,64 @@
       </div>
     </div>
   </div>
+
+  <!-- ini setting -->
+  <div id="setting" class="container cover gameOver">
+    <div class="row align-items-center">
+      <div class="col-sm-10 offset-sm-1 col-md-10 offset-md-1">
+        <div class="stat">
+          <div class="gameEnd">
+            <h4>SETTING</h4>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-3 col-sm-3 col-md-3">
+            <button onclick="back()" class="button"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ini help -->
+  <div id="help" class="container cover gameOver">
+    <div class="row align-items-center">
+      <div class="col-sm-10 offset-sm-1 col-md-10 offset-md-1">
+        <div class="stat">
+          <div class="gameEnd">
+            <h4>CARA BERMAIN</h4>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-3 col-sm-3 col-md-3">
+            <button onclick="back()" class="button"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ini ABOUT -->
+  <div id="about" class="container cover gameOver">
+    <div class="row align-items-center">
+      <div class="col-sm-10 offset-sm-1 col-md-10 offset-md-1">
+        <div class="stat">
+          <div class="gameEnd">
+            <h4>ABOUT US</h4>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-3 col-sm-3 col-md-3">
+            <button onclick="back()" class="button"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ini tombol pause -->
   <div id="pause" class="pause">
-    <button class="btnPause fa fa-pause"></button>
+    <button id="pauseBtn" class="btnPause fa fa-pause" onclick="pause()"></button>
   </div>
   <!-- <script>
     if('serviceWorker' in navigator) {
@@ -85,8 +161,24 @@
     }
   </script> -->
   <script type="text/javascript">
-    function menu() {
+
+    function setting() {
+      document.getElementById("cover").style.display = "none";
+      document.getElementById("setting").style.display = "block";
+    }
+    function help() {
+      document.getElementById("cover").style.display = "none";
+      document.getElementById("help").style.display = "block";
+    }
+    function about() {
+      document.getElementById("cover").style.display = "none";
+      document.getElementById("about").style.display = "block";
+    }
+    function back() {
       document.getElementById("ui").style.display = "none";
+      document.getElementById("setting").style.display = "none";
+      document.getElementById("help").style.display = "none";
+      document.getElementById("about").style.display = "none";
       document.getElementById("cover").style.display = "block";
     }
   </script>
