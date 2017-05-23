@@ -29,6 +29,9 @@
         var name;
         var touch1;
         var isPaused;
+        var text;
+        var id = new Array;
+        var i=0;
         var audio = new Audio('sounds/backsound.mp3');
         var gameArea = {
             // title : "spacelimit",
@@ -315,17 +318,42 @@
             document.getElementById("score").innerHTML = manager.score;
             document.getElementById("level").innerHTML = manager.level;
             if (support) {
+                var val = document.getElementById("playerName").value;
+                id[i] = {
+                  "name" : val,
+                  "score" : manager.score
+                };
+                text = JSON.stringify(id[i]);
+                localStorage.setItem("id["+i+"]", text);
+                // else {
+                //   var parse = JSON.parse(localStorage.getItem("id["+i+"]"))
+                //   id[i] = {
+                //     "name" : id[i].name,
+                //     "score" : manager.score
+                //   };
+                //   text = JSON.stringify(id[i]);
+                //   localStorage.setItem("id["+i+"]", text);
+                // }
+                // console.log(localStorage.getItem("id["+i+"]"));
                 // Code for localStorage/sessionStorage.
-                var LastScore = localStorage.getItem("highScore");
-                if(LastScore < manager.score){
-                    localStorage.setItem("highScore", manager.score);
+                var LastScore = JSON.parse(localStorage.getItem("id["+i+"]");
+                if(LastScore.score < manager.score){
+                    id[i] = {
+                      "name" : LastScore.name,
+                      "score" : manager.score
+                    };
+                    text = JSON.stringify(id[i]);
+                    localStorage.setItem("id["+i+"]", text);
                     document.getElementById("high").innerHTML = manager.score;
                 } else {
-                  if(LastScore < 1){
+                  if(LastScore.score < 1){
                     document.getElementById("high").innerHTML = 0;
                   } else {
-                    document.getElementById("high").innerHTML = LastScore;
+                    document.getElementById("high").innerHTML = LastScore.score;
                   }
+                }
+                if ('null' != val) {
+                  i+=1;
                 }
             }
             gameArea.canvas.style.display = "none";
